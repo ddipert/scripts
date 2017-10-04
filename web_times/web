@@ -1,0 +1,23 @@
+#!/bin/bash
+#Created on October 2017
+#Script will poll times of the listed sites 
+#putting times in results_times file. 
+#running the AWK comamnd on the results file will give you the average of the times captured. 
+#awk '{ sum += $2 } END { if (NR > 0) print sum / NR }' results_times
+#
+#use the below command to run the script every 2 seconds until you CTL^c out.
+#while true; do /Users/ddipert/scripts/web_times/web_times.bsh ; sleep 2 ;done
+
+
+#list of varible sites
+ya=https://yahoo.com
+go=http://google.com
+fb=http://facebook.com
+cnn=http://cnn.com
+
+
+for sites in ya go fb cnn; do
+  printf "$site" | curl -s -w %{time_total}\\n -o /dev/null $sites >> results_times
+
+done
+
